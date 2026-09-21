@@ -9,7 +9,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
       if (!token) return;
       try{
-        const response = await fetch("http://localhost:5000/api/resumes/me",{
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/resumes/me`,{
           headers:{Authorization: `Bearer ${token}`}
         });
         const data = await response.json();

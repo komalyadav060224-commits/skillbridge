@@ -34,7 +34,7 @@ function UploadResume() {
       formData.append("resume",file);
       try {
         setUploading(true);
-        const response = await fetch("http://localhost:5000/api/resumes/upload",{
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/resumes/upload`,{
           method:"POST",
           headers: {
             Authorization: `Bearer ${token}`

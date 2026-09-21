@@ -34,7 +34,7 @@ function JobDescription() {
     try{
       setSubmitting(true);
       setError("");
-      const response = await fetch("http://localhost:5000/api/resumes/match-upload",{
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/resumes/upload`,{
         method:"POST",
         headers: {Authorization:`Bearer ${token}`},
         body: formData          
