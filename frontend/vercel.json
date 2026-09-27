@@ -1,0 +1,5 @@
+{
+    "rewries":[
+        {"source" : "/(.*)","destinaation": "/index.html"}
+    ]
+}
