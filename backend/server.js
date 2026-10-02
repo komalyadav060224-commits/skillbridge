@@ -7,7 +7,10 @@ const resumeRoutes = require("./routes/resumeRoutes");
 const app = express();
 connectDB();
 app.use(cors({
-    origin: [process.env.FRONTEND_URL, "http://localhost:5173"].filter(Boolean),
+    origin: [ "http://localhost:5173",
+                "https://skillbridge-rho-self.vercel.app"
+],
+
     credentials: true,
 }));
 app.use(express.json());
