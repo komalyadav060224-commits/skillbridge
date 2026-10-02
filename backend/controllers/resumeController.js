@@ -8,9 +8,7 @@ const mammoth = require("mammoth");
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite";
 
-// ---------------------------------------------------------------
-// Text extraction (works from memory, no files on disk)
-// ---------------------------------------------------------------
+
 async function extractTextFromBuffer(buffer, filename) {
     const ext = path.extname(filename || "").toLowerCase();
 
@@ -165,10 +163,6 @@ function compareResumeToJob(resumeText, jobText) {
 
     return { matchScore, matchedSkills: matched, missingSkills: missing };
 }
-
-// ---------------------------------------------------------------
-// PDF layout
-// ---------------------------------------------------------------
 function buildResumePdf(doc, data) {
     const ACCENT = "#1a5f7a";
     const DARK = "#222222";
@@ -309,7 +303,7 @@ exports.uploadResume = async (req, res) => {
         const newResume = await Resume.create({
             userId: req.userId,
             fileName: req.file.originalname,
-            text,
+            rawText:text,
         });
 
         res.status(201).json({
