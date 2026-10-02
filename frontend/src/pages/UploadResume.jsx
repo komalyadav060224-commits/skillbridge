@@ -72,11 +72,19 @@ function UploadResume() {
           </button>
           </form>
           {error && <p style={{ color:"red", marginTop:"12px"}}>{error}</p>}
-          {success && <p style={{color: "green",marginTop:"12px"}}>{success}</p>}
-      
+          {success && (
+            <>
+              <p style={{color: "green",marginTop:"12px"}}>{success}</p>
+              <button
+                onClick={() => navigate("/job-description")}
+                style={{ marginTop: "12px" }}
+              >
+                Continue to Job Description
+              </button>
+            </>
+          )}
         </div>
       </div>
   );
 }
 export default UploadResume;
-

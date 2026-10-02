@@ -39,4 +39,4 @@ const resumeSchema = new mongoose.Schema(
     },
         {timestamps:true}    
 );
-module.exports = mongoose.model("Resume",resumeSchema);
+module.exports = mongoose.model.Resume || mongoose.model("Resume",resumeSchema);

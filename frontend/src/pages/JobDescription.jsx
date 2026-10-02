@@ -34,7 +34,7 @@ function JobDescription() {
     try{
       setSubmitting(true);
       setError("");
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/resumes/upload`,{
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/resumes/match-upload`,{
         method:"POST",
         headers: {Authorization:`Bearer ${token}`},
         body: formData          
@@ -42,7 +42,7 @@ function JobDescription() {
       const data = await response.json();
       if (response.ok){
         localStorage.setItem("matchResultData",JSON.stringify(data));
-        localStorage.removeItem("jobDescription");
+        localStorage.removeItem("jobDescription", data.jobDescription || "");
         navigate("/match-result");
       }else{
         setError(data.message || "Failed to process job description file.");
@@ -51,8 +51,8 @@ function JobDescription() {
       setError("Something went wring. Please try again.");
     }finally{
       setSubmitting(false);
-    }
-  }
+    }  
+  };
   return (
     <div className="job-page">
       <div className="job-box">

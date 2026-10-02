@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const router = require("../routes/resumeRoutes");
 const protect = (req, res, next) =>{
     try{
         const authHeader = req.headers.authorization;
