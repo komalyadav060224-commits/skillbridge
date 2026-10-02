@@ -347,7 +347,7 @@ exports.getMyResume = async (req, res) => {
     try {
         const resume = await Resume.findOne({ userId: req.userId })
             .sort({ createdAt: -1 })
-            .select("-text");
+            .select("-rawText");
         if (!resume) {
             return res.status(404).json({ message: "No resume uploaded yet." });
         }
@@ -368,7 +368,7 @@ exports.matchResumeWithFile = async (req, res) => {
         if (!resume) {
             return res.status(404).json({ message: "No resume found. Please upload one first." });
         }
-        if (!resume.text) {
+        if (!resume.rawText) {
             return res.status(400).json({ message: "Please upload your resume again." });
         }
 
@@ -377,7 +377,7 @@ exports.matchResumeWithFile = async (req, res) => {
             return res.status(400).json({ message: "Could not read any text from the job description file." });
         }
 
-        const result = compareResumeToJob(resume.text, jobText);
+        const result = compareResumeToJob(resume.rawText, jobText);
         res.status(200).json({ ...result, jobDescription: jobText });
     } catch (error) {
         console.log("MATCH FILE ERROR:", error);
@@ -396,10 +396,10 @@ exports.generateResume = async (req, res) => {
         if (!resume) {
             return res.status(404).json({ message: "No resume found. Please upload one first." });
         }
-        if (!resume.text) {
+        if (!resume.rawText) {
             return res.status(400).json({ message: "Please upload your resume again." });
         }
-        const existingResumeText = resume.text;
+        const existingResumeText = resume.rawText;
 
         const model = genAI.getGenerativeModel({
             model: GEMINI_MODEL,
